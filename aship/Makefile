@@ -1,5 +1,8 @@
 CC = gcc
-FLAGS = -pg -O3
+FLAGS = -O3 -pg -fprofile-arcs
+
+INPUT = ../data/datain.txt
+OUTPUT = ../data/dataout.txt
 
 aship: aship.o
 	$(CC) $(FLAGS) aship.o -o aship
@@ -12,13 +15,13 @@ noprof:
 	$(CC) aship.o -o aship
 
 run:
-	-../aship/aship ../data/datain.txt ../data/dataout.txt
+	-../aship/aship  $(INPUT) $(OUTPUT)
 
 prof: run
-	gprof aship > aship.out
+	gprof aship gmon.out > profile.txt
 
 image:
 	octave --persist ../Matlab/text2im.m
 
 clean:
-	rm -f *.o aship gmon.out aship.out
+	rm -f *.o aship gmon.out aship.out profile.txt aship.gcda

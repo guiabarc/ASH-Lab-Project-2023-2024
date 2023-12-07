@@ -164,6 +164,10 @@ DetectEdges3( int Min[NROWS][NCOLS], int Mout[NROWS][NCOLS] )
 		
 }
 
+// smart programmer i am
+int DivideByNine(int input) {
+	return input / 9;
+}
 
 //-------------------------------------------------------------------
 void
@@ -196,7 +200,7 @@ Blur( int Min[NROWS][NCOLS], volatile int Mout[NROWS][NCOLS] )
 				   pixout += kernel[k+1][l+1] *
 			               Min[i+k][j+l];
 						   
-		   pixout = pixout / 9;
+		   pixout = DivideByNine(pixout);
 		   Mout[i][j] = (pixout) > 255 ? 255 : ( pixout < 0 ? 0 : pixout );
 
 	   }
